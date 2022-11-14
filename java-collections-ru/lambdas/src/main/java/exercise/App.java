@@ -27,7 +27,7 @@ class App {
         return Arrays.stream(image)
                 .map(innerStr -> {
                     return Arrays.stream(innerStr)
-                            .flatMap(g -> Stream.of(g,g)).toArray(String[] :: new);
+                            .flatMap(element -> Stream.of(element,element)).toArray(String[] :: new);
                 })
                 .flatMap(outerStr -> Stream.of(outerStr,outerStr))
                 .toArray(String[][] :: new);
