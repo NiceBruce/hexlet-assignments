@@ -1,9 +1,7 @@
 package exercise;
 
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 // BEGIN
 class App {
