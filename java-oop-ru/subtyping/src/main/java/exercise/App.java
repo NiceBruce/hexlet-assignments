@@ -15,7 +15,7 @@ class App {
     }
 
     public static void main(String[] args) {
-        KeyValueStorage kv = new InMemoryKV(Map.of("key1","value1","key2","value2"));
+        KeyValueStorage kv = new InMemoryKV(Map.of("key1", "value1", "key2", "value2"));
 
         swapKeyValue(kv);
     }

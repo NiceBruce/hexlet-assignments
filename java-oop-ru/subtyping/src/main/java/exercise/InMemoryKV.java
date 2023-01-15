@@ -8,7 +8,7 @@ class InMemoryKV implements KeyValueStorage {
 
     Map<String, String> localStorage = new HashMap<>();
 
-    InMemoryKV (Map<String, String> map) {
+    InMemoryKV(Map<String, String> map) {
         this.localStorage.putAll(map);
     }
 
@@ -36,7 +36,7 @@ class InMemoryKV implements KeyValueStorage {
 
     @Override
     public Map<String, String> toMap() {
-        Map <String, String> res = new HashMap<>(localStorage);
+        Map<String, String> res = new HashMap<>(localStorage);
         return res;
     }
 }

@@ -10,7 +10,7 @@ class FileKV implements KeyValueStorage {
     static Map<String, String> dataFromFile = new HashMap<>();
     static String cache;
 
-    FileKV (String filePath, Map<String, String> map) {
+    FileKV(String filePath, Map<String, String> map) {
         this.filePath = filePath;
         this.cache = Utils.serialize(map);
         Utils.writeFile(this.filePath, this.cache);
@@ -55,7 +55,7 @@ class FileKV implements KeyValueStorage {
 
     @Override
     public Map<String, String> toMap() {
-        Map <String, String> res = new HashMap<>(dataFromFile);
+        Map<String, String> res = new HashMap<>(dataFromFile);
         return res;
     }
 }
