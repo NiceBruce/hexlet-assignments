@@ -28,15 +28,26 @@ public class UsersServlet extends HttpServlet {
             <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             </head>
-            <style>
+            <style type="text/css"> 
                 table, th, td {
+                    margin: auto;
+                    text-align: center;
+                    width: 600px;
                     border: 1px solid black;
                     border-collapse: collapse;
                 }
+                TH {
+                    background: #fc0;
+                    height: 40px;
+                    vertical-align: center;
+                    padding: 0;
+                    }
             </style>
             <body>
             <table>
-                %s
+                <tbody>
+                    %s
+                </tbody>
             <table>
             </body>
             </html>
