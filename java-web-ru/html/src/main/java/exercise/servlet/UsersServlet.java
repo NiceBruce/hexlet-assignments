@@ -29,10 +29,10 @@ public class UsersServlet extends HttpServlet {
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             </head>
             <style>
-            table, th, td {
-              border: 1px solid black;
-              border-collapse: collapse;
-            }
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
             </style>
             <body>
             <table>
@@ -42,12 +42,6 @@ public class UsersServlet extends HttpServlet {
             </html>
             """;
 
-    public static final String htmlUserRow = """
-            <tr>
-                <td>%s</td>
-                <td><a href=\"/users/%s\">%s</a></td>
-            </tr>
-            """;
 
     @Override
     public void doGet(HttpServletRequest request,
@@ -100,10 +94,16 @@ public class UsersServlet extends HttpServlet {
                 </tr>
                 """);
 
-        for (Map<String, String> user : users) {
+        users.stream().forEach(user -> {
             String fullName = user.get("firstName") + " " + user.get("lastName");
-            userRows.append(htmlUserRow.formatted(user.get("id"), user.get("id"), fullName));
-        }
+            userRows.append("""
+            <tr>
+                <td>%s</td>
+                <td><a href=\"/users/%s\">%s</a></td>
+            </tr>
+            """.formatted(user.get("id"), user.get("id"), fullName));
+        });
+
         pw.println(htmlTable.formatted(userRows));
         // END
     }
@@ -114,8 +114,6 @@ public class UsersServlet extends HttpServlet {
                  throws IOException {
 
         // BEGIN
-
-//        response.sendError(404, "");
         PrintWriter pw = response.getWriter();
         List<Map<String, String>> users = getUsers();
 
@@ -132,27 +130,23 @@ public class UsersServlet extends HttpServlet {
                 </tr>
                 """);
 
-//        long res = users.stream().filter(i -> i.containsValue(
-//        id)).count();
         if (users.stream().noneMatch(i -> i.containsValue(id))) {
-            response.sendError(404);
-        }
-
-        users.stream()
-                .forEach(m -> {
-                    if (m.containsValue(id)) {
-                        for (String data : m.keySet()) {
-                            userRows.append("""
+            response.sendError(SC_NOT_FOUND, "Not found");
+        } else {
+            users.stream()
+                    .forEach(m -> {
+                        if (m.containsValue(id)) {
+                            for (String data : m.keySet()) {
+                                userRows.append("""
                              <tr>
                                 <td>%s</td>
                                 <td>%s</td>
                             </tr>
                             """.formatted(data, m.get(data)));
+                            }
                         }
-                    }
-                });
-
-
+                    });
+        }
 
         pw.println(htmlTable.formatted(userRows));
         // END
