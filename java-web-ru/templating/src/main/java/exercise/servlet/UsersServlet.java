@@ -1,7 +1,6 @@
 package exercise.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -139,9 +138,9 @@ public class UsersServlet extends HttpServlet {
         }
         // BEGIN
         users.remove(user);
-//        request.setAttribute("users", users);
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users.jsp");
-//        requestDispatcher.forward(request, response);
+        String path = "/users";
+        response.setStatus(response.SC_MOVED_PERMANENTLY);
+        response.setHeader("Location", path);
         // END
     }
 

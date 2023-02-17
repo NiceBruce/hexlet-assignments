@@ -31,7 +31,7 @@
     <th>Users full Name</th>
 </tr>
 <c:forEach var="user" items="${users}">
-<tr>firstName
+<tr>
     <td>${user.get("id")}</td>
     <td><a href='/users/show?id=${user.get("id")}'>${user.get("firstName")} ${user.get("lastName")}</a></td>
 </tr>
