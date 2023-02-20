@@ -41,10 +41,14 @@
         </nav>
         <div class="container mt-3">
             <!-- BEGIN -->
-            <div class="alert alert-info" role="alert" th:text="${sessionScope.flash}" th:if="${sessionScope.flash}">
-                ${sessionScope.flash}
-            </div>
-            <% session.removeAttribute("flash"); %>
+            <c:choose>
+                <c:when test='${sessionScope.flash != null}'>
+                    <div class="alert alert-info" role="alert">
+                        ${sessionScope.flash}
+                    </div>
+                    <% session.removeAttribute("flash"); %>
+                </c:when>
+            </c:choose>
             <!-- END -->
             <jsp:doBody />
         </div>
