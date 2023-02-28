@@ -22,7 +22,6 @@ public class UserController implements CrudHandler {
 
         String json = DB.json().toJson(users);
         ctx.json(json);
-//        ctx.result("hui");
         // END
     };
 
@@ -42,7 +41,17 @@ public class UserController implements CrudHandler {
 
         // BEGIN
         String body = ctx.body();
-        User user = DB.json().toBean(User.class, body);
+
+        User user = ctx.bodyValidator(User.class)
+                .check(obj -> obj.getFirstName().length() > 0, "Name should not empty")
+                .check(obj -> obj.getLastName().length() > 0, "Last Name should not empty")
+                .check(obj -> EmailValidator.getInstance().isValid(obj.getEmail()), "email isn't valid")
+                .check(obj -> StringUtils.isNumeric(obj.getPassword()), "password should have only digits")
+                .check(obj -> obj.getPassword().length() > 4, "Lpassword shoild be more 4 symbols")
+                .get();
+
+//        user = DB.json().toBean(User.class, body);
+//
         user.save();
         // END
     };
@@ -55,6 +64,8 @@ public class UserController implements CrudHandler {
         User user = new QUser()
                 .id.equalTo(Long.parseLong(id))
                 .findOne();
+
+
 
         user.setId(id);
 
@@ -72,7 +83,6 @@ public class UserController implements CrudHandler {
 
     public void delete(Context ctx, String id) {
         // BEGIN
-
         new QUser()
                 .id.equalTo(Long.parseLong(id))
                 .delete();
