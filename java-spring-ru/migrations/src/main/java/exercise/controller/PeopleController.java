@@ -23,7 +23,7 @@ public class PeopleController {
 
     // BEGIN
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Map<String, Object>> getPersons() {
         String query = "SELECT * FROM person";
         return jdbc.queryForList(query);
