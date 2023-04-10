@@ -23,11 +23,11 @@ public interface UserRepository extends
         // Дополнительная задача
 
         // BEGIN
-//        bindings.bind(user.firstName).first((path, value) -> path.startsWithIgnoreCase(value));
-//        bindings.bind(user.lastName).first((path, value) -> path.startsWithIgnoreCase(value));
-//        bindings.bind(user.firstName).first((path, value) -> path.startsWithIgnoreCase(value));
-//        bindings.bind(String.class)
-//                .first((StringPath path, String value) -> path.containsIgnoreCase(value));
+//        bindings.bind(user.firstName).first((path, value) -> path.containsIgnoreCase(value));
+//        bindings.bind(user.lastName).first((path, value) -> path.containsIgnoreCase(value));
+        bindings.bind(user.gender).first((path, value) -> path.eq(value));
+        bindings.bind(String.class)
+                .first((StringPath path, String value) -> path.containsIgnoreCase(value));
         // END
     }
 
