@@ -6,6 +6,11 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 class App {
+    public static void main(String[] args) {
+        int[] numbers = {10, -4, 67, 100, -100, 8};
+
+        System.out.println(App.getMinMax(numbers)); // => {min=-100, max=100}
+    }
     private static final Logger LOGGER = Logger.getLogger("AppLogger");
 
     // BEGIN
